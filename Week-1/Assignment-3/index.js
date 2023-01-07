@@ -10,7 +10,16 @@ function countAandB(input) {
     }
   }
 
-  return a + b;
+  const isAPlural = a > 1 ? 's' : '';
+  const isBPlural = b > 1 ? 's' : '';
+
+  if (a + b) {
+    return `${
+      a + b
+    } (${a} 'a' letter${isAPlural} and ${b} 'b' letter${isBPlural})`;
+  } else {
+    return 0;
+  }
 }
 
 function toNumber(input) {
