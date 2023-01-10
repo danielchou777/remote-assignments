@@ -9,8 +9,8 @@ banner.click(() => {
 
 btn.click(() => {
   if (cardSecond.attr('style')) {
-    cardSecond.attr('style', '');
+    cardSecond.show();
   } else {
-    cardSecond.attr('style', 'display:none');
+    cardSecond.hide();
   }
 });
