@@ -14,7 +14,7 @@ function binarySearchPosition(numbers, target) {
       end = mid - 1;
     }
   }
-  // If target not exists, return -1
+  // If target does not exist, return -1
   return -1;
 }
 console.log(binarySearchPosition([1, 2, 5, 6, 7], 1)); // should print 0
