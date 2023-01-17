@@ -14,15 +14,14 @@ app.get('/', (req, res) => res.status(200).send('<h1>Hello Wolrd!</h1>'));
 
 app.get('/data', (req, res) => {
   let { number } = req.query;
-  number = Number(number);
-  const sum = sumOfNTerms(number);
-
-  if (!Number.isNaN(number) && !number) {
+  if (!number) {
     return res.status(200).send('<h1>Lack of Parameter</h1>');
   }
-  if (Number.isNaN(number) || number <= 0 || !Number.isInteger(number)) {
+  number = Number(number);
+  if (!Number.isInteger(number) || number <= 0) {
     return res.status(200).send('<h1>Wrong Parameter</h1>');
   }
+  const sum = sumOfNTerms(number);
   return res.status(200).json({ sum });
 });
 
@@ -34,17 +33,11 @@ app.get('/myName', (req, res) => {
   return res.status(200).sendFile(path.join(`${__dirname}/public/myName.html`));
 });
 
-app.get('/trackName', (req, res) => {
+app.post('/trackName', (req, res) => {
   const { name } = req.query;
-  console.log(name);
-  return res
-    .status(201)
-    .cookie('name', name, {
-      httpOnly: true,
-    })
-    .json({ name });
+  return res.status(201).cookie('name', name).redirect(302, '/myName');
 });
 
 app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
+  console.log(`Server is listening on port ${port}`);
 });

@@ -1,9 +1,8 @@
 const input = $('input');
 const btn = $('button');
+const form = $('form');
 
-btn.on('click', async (e) => {
+btn.on('click', async () => {
   const name = input.val();
-  e.preventDefault();
-  await $.get(`/trackName?name=${name}`);
-  window.location.href = '/myName';
+  form.attr('action', `/trackName?name=${name}`);
 });
