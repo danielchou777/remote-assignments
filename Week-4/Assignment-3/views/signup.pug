@@ -1,0 +1,12 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Register
+  link(rel='stylesheet' href='./css/style.css')
+main
+  h2 Create Account
+  form(method='POST' action='/register')
+    input(type='text' name='email' placeholder='Your email...')
+    input(type='text' name='password' placeholder='Your password...')
+    button.btn(type='submit') Register
