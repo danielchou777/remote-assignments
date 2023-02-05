@@ -8,6 +8,7 @@ const port = process.env.port || 3000;
 
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -17,26 +18,19 @@ app.get('/', (req, res) => {
   res.render('home');
 });
 
-app.get('/register', (req, res) => {
-  res.status(200).render('signup');
-});
-
 app.post('/register', async (req, res, next) => {
   const { email, password } = req.body;
   try {
     const user = await register(email, password);
-    res.status(200).render('member', { email: user.email });
+    res.status(200).json({ msg: 'success' });
   } catch (err) {
     // handle duplicate entry error from mysql
     if (err.errno === 1062) {
+      err.message = 'Email already exists, please try again';
       err.status = 400;
     }
     next(err);
   }
-});
-
-app.get('/login', (req, res) => {
-  res.status(200).render('signin');
 });
 
 app.post('/login', async (req, res, next) => {
@@ -44,7 +38,7 @@ app.post('/login', async (req, res, next) => {
   try {
     const user = await getUser(email, password);
     if (user) {
-      res.status(200).render('member', { email: user.email });
+      res.status(200).json({ msg: 'success' });
     } else {
       const err = Error('Incorrect email or password, please try again');
       err.status = 401;
@@ -55,6 +49,11 @@ app.post('/login', async (req, res, next) => {
   }
 });
 
+app.post('/member', (req, res) => {
+  const { email } = req.body;
+  res.status(200).render('member', { email });
+});
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
@@ -63,7 +62,7 @@ app.use(function (req, res, next) {
 // error handler
 app.use((err, req, res, next) => {
   res.status(err.status || 500);
-  res.render('error', { error: err.message });
+  res.json({ error: err.message });
 });
 
 app.listen(port, () => {

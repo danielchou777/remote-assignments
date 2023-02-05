@@ -6,7 +6,16 @@ head
   link(rel='stylesheet' href='./css/style.css')
 main
   h2 Welcome to the site!
-  a(href='/login')
-    button.btn Sign In
-  a(href='/register')
-    button.btn Sign Up
+  div(class='container') 
+    form(method='POST' action='/member' id='login-form')
+      h3 Sign in
+      input(id='signin-email' type='email' name='email' placeholder='Your email...')
+      input(id='signin-password' type='text' name='password' placeholder='Your password...')
+      button.btn(type='submit' class='login') login
+    form(method='POST' action='/member' id='register-form')
+      h3 Sign up
+      input(id='signup-email' type='email' name='email' placeholder='Your email...')
+      input(id='signup-password' type='text' name='password' placeholder='Your password...')
+      button.btn(type='submit' class='register') Register
+script(src='https://code.jquery.com/jquery-3.6.3.min.js' integrity='sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=' crossorigin='anonymous')
+script(src='js/home.js')

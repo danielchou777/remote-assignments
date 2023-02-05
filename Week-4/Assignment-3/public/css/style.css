@@ -91,7 +91,7 @@ h3 {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
-input[type='text'],
+input,
 select {
   width: 210px;
   padding: 8px 16px;
@@ -138,4 +138,15 @@ h3 {
   height: 500px;
   object-fit: cover;
   border-radius: 0.5rem;
+}
+
+.container {
+  display: inline-flex;
+  flex-direction: row;
+  gap: 60px;
+}
+
+p {
+  width: 210px;
+  color: red;
 }
