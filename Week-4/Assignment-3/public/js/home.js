@@ -21,7 +21,9 @@ loginBtn.on('click', async (e) => {
   const result = await response.json();
   const { msg } = result;
   if (msg === 'success') {
-    loginForm.submit();
+    const html = `<form action='/member' method=POST name='member' style='display:none'><input type='email' name='email' value='${signinEmail.val()}'/></form>`;
+    document.write(html);
+    document.member.submit();
   } else {
     const { error } = result;
     loginForm.append(`<p>${error}</p>`);
@@ -42,7 +44,9 @@ registerBtn.on('click', async (e) => {
   const result = await response.json();
   const { msg } = result;
   if (msg === 'success') {
-    registerForm.submit();
+    const html = `<form action='/member' method=POST name='member' style='display:none'><input type='email' name='email' value='${signupEmail.val()}'/></form>`;
+    document.write(html);
+    document.member.submit();
   } else {
     const { error } = result;
     registerForm.append(`<p>${error}</p>`);
